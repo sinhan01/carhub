@@ -39,10 +39,10 @@ public with sharing class CarController {
                 criteria.add('Make__c IN :makeType');
             }
             if(criteria.size()>0){
-                whereClause = 'WHERE ' + String.join(criteria, ' AND ');
+                whereClause = ' WHERE ' + String.join(criteria, ' AND ');
             }
         }
-        string query = 'select Id, Name,MSRP__c, Description__c, Category__c, Picture_URL__c from Car__C' + whereClause + ' WITH SECURITY_ENFORCED' +'ORDER BY NAME';
+        string query = 'select Id, Name,MSRP__c, Description__c, Category__c, Picture_URL__c from Car__C' + whereClause + ' WITH SECURITY_ENFORCED' +' ORDER BY NAME';
         return Database.query(query);
     }
 
