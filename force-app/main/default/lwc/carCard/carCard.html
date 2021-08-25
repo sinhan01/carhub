@@ -1,16 +1,22 @@
 <template>
     <lightning-card title={carName} icon-name="standard:apex_plugin">
-        <div class="slds-var-m-horizontal_small">
-            <img src={carPictureUrl} alt="Car Picture"/>
-            <lightning-record-view-form onload={handleRecordLoad} record-id={recordId} object-api-name="Car__c" density="compact">
-                <lightning-output-field field-name={category_Field}></lightning-output-field>
-                <lightning-output-field field-name={make_Field}></lightning-output-field>
-                <lightning-output-field field-name={msrp_Field}></lightning-output-field>
-                <section>Other Features</section>
-                <lightning-output-field field-name={fuel_Field}></lightning-output-field>
-                <lightning-output-field field-name={seats_Field}></lightning-output-field>
-                <lightning-output-field field-name={control_Field}></lightning-output-field>
-            </lightning-record-view-form>
-        </div>
+        <template if:true={recordId}>
+            <lightning-button icon-name="utility:expand_alt" slot="actions" onclick={handleNavigationToRecord}></lightning-button>
+            <div class="slds-var-m-horizontal_small">
+                <img src={carPictureUrl} alt="Car Picture"/>
+                <lightning-record-view-form onload={handleRecordLoad} record-id={recordId} object-api-name="Car__c" density="compact">
+                    <lightning-output-field field-name={category_Field}></lightning-output-field>
+                    <lightning-output-field field-name={make_Field}></lightning-output-field>
+                    <lightning-output-field field-name={msrp_Field}></lightning-output-field>
+                    <section>Other Features</section>
+                    <lightning-output-field field-name={fuel_Field}></lightning-output-field>
+                    <lightning-output-field field-name={seats_Field}></lightning-output-field>
+                    <lightning-output-field field-name={control_Field}></lightning-output-field>
+                </lightning-record-view-form>
+            </div>
+        </template>
+        <template if:false={recordId}>
+            <c-place-holder message="Select a car to see detail"></c-place-holder>
+        </template>
     </lightning-card>
 </template>

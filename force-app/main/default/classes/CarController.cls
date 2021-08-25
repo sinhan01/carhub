@@ -46,4 +46,9 @@ public with sharing class CarController {
         return Database.query(query);
     }
 
+    @AuraEnabled(cacheable=true)
+    public static list<Car__c> getSimilarCars(Id carId, String[] makeType){
+        List<String> v1 = makeType;
+        return [select Id, Name,MSRP__c, Description__c, Category__c, Picture_URL__c, Make__c FROM Car__C where Make__c IN: v1 AND Id != :carId WITH SECURITY_ENFORCED];
+    }
 }
